@@ -20,7 +20,7 @@ As part of my Computer Science capstone, I am currently enhancing several projec
 **1. Software Design and Engineering**
 *Project: Grazioso Salvare Animal Rescue Dashboard*
 
-* [View Original Dashboard Code (Jupyter Notebook)](Software-Design/Original_Dashboard.ipynb)
+* [View Original Dashboard Code (Dash Framework)](Software-Design/Original_Dashboard.py)
 * [View Original CRUD Code](Software-Design/Original_AnimalRescueCRUD)
 * [View Enhanced UI Code (CustomTkinter)](Software-Design/AnimalRescueDashboard.py)
 * [View Enhanced Backend Code (CRUD Module)](Software-Design/AnimalRescueCRUD_Enhanced.py)
