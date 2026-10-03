@@ -21,7 +21,7 @@ As part of my Computer Science capstone, I am currently enhancing several projec
 *Project: Grazioso Salvare Animal Rescue Dashboard*
 
 * [View Original Dashboard Code (Dash Framework)](Software-Design/Original_Dashboard.py)
-* [View Original CRUD Code](Software-Design/Original_AnimalRescueCRUD)
+* [View Original CRUD Code](Software-Design/Original_AnimalRescueCRUD.py)
 * [View Enhanced UI Code (CustomTkinter)](Software-Design/AnimalRescueDashboard.py)
 * [View Enhanced Backend Code (CRUD Module)](Software-Design/AnimalRescueCRUD_Enhanced.py)
 
