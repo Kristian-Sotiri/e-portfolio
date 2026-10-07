@@ -48,7 +48,30 @@ Reflecting on the enhancement process, the biggest challenge I faced was transla
 
 **2. Algorithms and Data Structures**
 *Project: Academic Course Catalog System*
-I am optimizing a C++ program by replacing a standard vector and linear search algorithm with a custom, self-balancing AVL Tree. This guarantees logarithmic search times and demonstrates advanced memory management.
+
+* [View Original Code (Vector and Linear Search)](Algorithms/Original_CourseLookup.cpp)
+* [View Enhanced Code (AVL Tree Implementation)](Algorithms/CourseLookup_Enhanced.cpp)
+
+**Artifact Description**
+The Academic Course Catalog System is a C++ command-line application originally developed for the CS 260 Data Structures and Algorithms course. The program parses a CSV file containing course data and prerequisites, loads it into a data structure, and provides a menu-driven interface for users to print the entire catalog or search for specific courses.
+
+**Justification and Architectural Trade-Offs**
+I selected this artifact because it demonstrates my ability to optimize software performance by implementing complex, self-balancing data structures from scratch. The original application stored course objects in a standard C++ `std::vector` and utilized a linear search algorithm. While vectors have minimal memory overhead, linear searches result in $O(N)$ time complexity, which scales poorly as a database grows.
+
+To optimize the program, I replaced the vector with a custom AVL Tree. This required manual C++ pointer management to build the nodes and implement the left and right rotation logic. The primary architectural trade-off of this decision was memory footprint; maintaining an AVL tree requires allocating extra memory per node to store left pointers, right pointers, and height integers. However, because this application is highly read-intensive, the extra memory overhead is highly preferable to guarantee an $O(\log N)$ search time. Additionally, this structure natively allows for an in-order traversal, eliminating the need to write a separate sorting algorithm to print the catalog alphabetically.
+
+**Testing and Verification**
+To ensure the integrity of the AVL tree, I conducted a series of specific behavioral tests:
+* **Multiple Insertions and Balancing:** I parsed an unsorted CSV file of courses to test the tree's automatic balancing logic. I verified that the Left-Right and Right-Left rotations successfully executed after multiple insertions, maintaining a balanced tree height and preventing the structure from degrading into a linked list.
+* **Successful Searches:** I queried various course IDs and verified that the tree correctly retrieved and outputted the specific course titles and associated prerequisites in logarithmic time.
+* **Ordered Traversal:** I executed the "Print Course List" command and validated that the in-order traversal correctly printed the alphanumeric course IDs in perfect ascending order.
+* **Duplicate Course Handling:** I tested the insertion of duplicate course IDs to verify the system's fault tolerance, ensuring the application handles redundancies gracefully without crashing or unbalancing the tree structure.
+
+**Course Outcome Alignment**
+This enhancement thoroughly demonstrates the algorithms and data structures outcome. By manually managing memory pointers and implementing a mathematically balanced tree structure, I showcased advanced algorithmic logic and the ability to evaluate the time-space complexities of different data structures to solve a specific performance bottleneck.
+
+**Reflection**
+Reflecting on this enhancement, the most significant challenge was writing the specific pointer reassignment logic for the AVL rotations. Visualizing how the root, left, and right child pointers needed to shift during a double rotation required careful diagramming to avoid memory leaks or segmentation faults. Overcoming this challenge significantly deepened my understanding of low-level memory management in C++ and how data structures operate under the hood.
 
 **3. Databases**
 *Project: MongoDB CRUD Module*
