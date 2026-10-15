@@ -75,7 +75,28 @@ Reflecting on this enhancement, the most significant challenge was writing the s
 
 **3. Databases**
 *Project: MongoDB CRUD Module*
-I am overhauling a backend Python script by implementing strict data validation, advanced aggregation pipelines, and secure environment variables to protect sensitive credentials.
+
+* [View Original Code (Basic Queries)](Software-Design/Original_AnimalRescueCRUD.py)
+* [View Enhanced Code (Schema Validation & Aggregation)](Software-Design/AnimalRescueCRUD_Enhanced.py)
+
+**Artifact Description**
+The artifact selected for this enhancement is the AnimalRescueCRUD backend module, originally developed for the CS 340 Client/Server Development course. This Python script serves as the communication bridge between the frontend desktop application and the MongoDB database containing the Grazioso Salvare animal rescue records. It establishes the secure network connection and handles all creation, reading, updating, and deletion operations for the system.
+
+**Justification and Enhancements**
+I included this artifact in my e-portfolio because it clearly showcases my ability to manipulate databases and implement defensive programming principles. The original academic version of this module simply passed raw query dictionaries from the frontend directly into basic MongoDB read operations. To bring this up to professional standards, I completely overhauled how the database processes and protects data. 
+
+First, I implemented strict schema validation at the database level by sending a `$jsonSchema` command directly to MongoDB. This forces the database engine to reject any incoming documents that lack required fields like animal type, breed, or age. Second, I removed the hardcoded query logic from the frontend UI and created a secure aggregation pipeline within the CRUD module. Using the `.aggregate()` function, the backend now utilizes `$match` and `$sort` stages to filter the mountain, water, and tracking rescue candidates entirely on the server side. This minimizes network payload sizes and abstracts the database architecture away from the client.
+
+**Testing and Verification**
+To prove the security and efficiency of these database enhancements, I conducted specific backend tests:
+* **Schema Validation Rejections:** I attempted to insert malformed records into the database, specifically omitting the required `breed` field and passing a negative integer for the `age_upon_outcome_in_weeks`. The MongoDB server successfully intercepted and rejected these injections. The Python module caught the resulting `OperationFailure`, logged the rejection securely without crashing, and prevented the bad data from corrupting the database.
+* **Aggregation Pipeline Accuracy:** I queried the database for "water" rescue candidates. The pipeline successfully executed the `$match` stage on the server, returning a precise payload containing *only* Intact Female Labradors, Golden Retrievers, and Newfoundlands between 26 and 156 weeks old. Furthermore, the `$sort` stage correctly ordered the returned records by age in ascending order, verifying that the server-side computation worked flawlessly before the data ever reached the frontend UI.
+
+**Course Outcome Alignment**
+This enhancement directly meets the course outcomes for both database management and software security. As my instructor noted during the code review, simple Python validation is not enough to stop malicious injections. By implementing true schema validation on the database itself alongside secure credential routing via environment variables, I successfully demonstrated the security outcome of mitigating structural design flaws. Furthermore, constructing the aggregation pipeline proves my capability to optimize complex database queries and manage large data structures efficiently.
+
+**Reflection**
+The process of enhancing this database module highlighted the critical difference between writing code that works and writing code that is secure. The biggest challenge I faced was configuring the schema validation rules using the `collMod` command. If the rules were too strict, legitimate rescue records were rejected. If they were too loose, it defeated the purpose of the security enhancement. I had to carefully map out the exact BSON data types expected by the database and wrap the validation command in a dedicated try and except block to gracefully handle permission boundaries. Overcoming this hurdle taught me how to securely design backend architectures that do not rely blindly on the frontend interface to provide clean data.
 
 ---
 
